@@ -8,7 +8,7 @@
 
 // -- Configuration (set via js/config.js, loaded before this file) --
 const SUPABASE_URL      = 'https://vawcsvpvwepkogkfluda.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZhd2NzdnB2d2Vwa29na2ZsdWRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3MzQ0OTUsImV4cCI6MjEwNjMxMDQ5NX0.eNrehZgJB_2FSn4sFi5PtS9YpKkw9LKfbqraYC6c_6k';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZhd2NzdnB2d2Vwa29na2ZsdWRhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MDczNDQ5NSwiZXhwIjoyMTA2MzEwNDk1fQ.qETafwwzIE1sh7TZvGS_w4Gc2SpxHd12w8JdwqdhXks';
 
 // Load the Supabase JS client (CDN, loaded in index.html)
 const { createClient } = supabase;
