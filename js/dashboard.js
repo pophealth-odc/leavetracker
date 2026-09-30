@@ -19,9 +19,17 @@ async function loadDashboard() {
     renderUpcomingList(stats.upcomingLeave);
   } catch (err) {
     console.error(err);
-    showToast('Failed to load dashboard. Check your Supabase configuration.', 'error');
-    document.getElementById('statCards').innerHTML =
-      `<p class="text-danger" style="padding:16px">Unable to load data. ${escapeHtml(err.message)}</p>`;
+    const isTableMissing = err.message?.includes('relation') || err.message?.includes('does not exist') || err.code === '42P01';
+    const hint = isTableMissing
+      ? 'The database tables have not been created yet. Run <code>supabase/schema.sql</code> in the Supabase SQL Editor.'
+      : 'Check your Supabase URL and anon key in <code>js/supabase.js</code>.';
+    showToast('Failed to load dashboard data.', 'error');
+    document.getElementById('statCards').innerHTML = `
+      <div style="padding:20px;background:#fff7f7;border:1px solid #fca5a5;border-radius:8px;margin-bottom:4px">
+        <strong style="color:#dc2626">⚠ Unable to load data</strong><br>
+        <span style="font-size:.85rem;color:#374151">${escapeHtml(err.message)}</span><br>
+        <span style="font-size:.82rem;color:#6b7280;margin-top:6px;display:block">${hint}</span>
+      </div>`;
   }
 }
 
