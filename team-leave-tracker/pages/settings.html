@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — Team Leave Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .config-card { max-width: 680px; }
+    .config-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; }
+    .config-field label { font-size: .83rem; font-weight: 600; }
+    .config-field .form-hint { font-size: .78rem; color: var(--color-muted); }
+    .connection-status {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 20px; font-size: .83rem; font-weight: 600;
+    }
+    .connection-status.ok    { background: #dcfce7; color: #16a34a; }
+    .connection-status.error { background: #fee2e2; color: #dc2626; }
+    .connection-status.idle  { background: #f1f5f9; color: #64748b; }
+  </style>
+</head>
+<body>
+<div class="app-wrapper">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><div class="brand-icon">🗓</div>Leave Tracker</div>
+    <nav class="sidebar-nav">
+      <a class="nav-item" href="dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a class="nav-item" href="calendar.html"><span class="nav-icon">📅</span> Calendar</a>
+      <div class="nav-section-label">Leave</div>
+      <a class="nav-item" href="leave.html"><span class="nav-icon">📝</span> Leave Records</a>
+      <div class="nav-section-label">Team</div>
+      <a class="nav-item" href="team.html"><span class="nav-icon">👥</span> Team Members</a>
+      <a class="nav-item" href="history.html"><span class="nav-icon">📋</span> Leave History</a>
+      <div class="nav-section-label">Configuration</div>
+      <a class="nav-item" href="leave-types.html"><span class="nav-icon">🏷</span> Leave Types</a>
+      <a class="nav-item" href="holidays.html"><span class="nav-icon">📆</span> Public Holidays</a>
+      <a class="nav-item active" href="settings.html"><span class="nav-icon">⚙</span> Settings</a>
+    </nav>
+    <div class="sidebar-footer">Team Leave Tracker v1.0</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="main-content">
+    <header class="top-header">
+      <div class="d-flex align-center gap-2">
+        <button class="hamburger-btn" id="hamburgerBtn">☰</button>
+        <span class="page-title">Settings</span>
+      </div>
+    </header>
+
+    <main class="page-body">
+      <div class="page-header">
+        <div><h1>Settings</h1><p>Configure your Supabase connection and application preferences.</p></div>
+      </div>
+
+      <!-- Supabase Config -->
+      <div class="card config-card mb-4">
+        <div class="card-header">
+          <span class="card-title">🔌 Supabase Configuration</span>
+          <span class="connection-status idle" id="connStatus">Not tested</span>
+        </div>
+        <div class="card-body">
+          <p style="font-size:.88rem;color:var(--color-muted);margin-bottom:16px">
+            Edit <code>js/supabase.js</code> and replace <code>YOUR_SUPABASE_URL</code> and
+            <code>YOUR_SUPABASE_ANON_KEY</code> with your actual Supabase project values.
+            You can find these in your Supabase project under
+            <strong>Settings → API</strong>.
+          </p>
+
+          <div class="config-field">
+            <label>Supabase URL</label>
+            <input type="text" class="form-control" id="cfgUrl" placeholder="https://xxxxxx.supabase.co" readonly>
+            <div class="form-hint">Read from js/supabase.js (SUPABASE_URL)</div>
+          </div>
+          <div class="config-field">
+            <label>Supabase Anon Key</label>
+            <input type="text" class="form-control" id="cfgKey" placeholder="eyJhbGci…" readonly style="font-family:monospace;font-size:.8rem">
+            <div class="form-hint">Read from js/supabase.js (SUPABASE_ANON_KEY)</div>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
+            <button class="btn btn-primary btn-sm" id="testConnBtn">Test Connection</button>
+            <span id="connMsg" style="font-size:.83rem;color:var(--color-muted)"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="card config-card mb-4">
+        <div class="card-header"><span class="card-title">🔗 Quick Links</span></div>
+        <div class="card-body">
+          <div class="settings-section" style="margin-bottom:0">
+            <div class="settings-item">
+              <div class="settings-item-label">
+                <strong>Manage Leave Types</strong>
+                <span>Add or edit the types of leave available to your team.</span>
+              </div>
+              <a href="leave-types.html" class="btn btn-secondary btn-sm">Go →</a>
+            </div>
+            <div class="settings-item">
+              <div class="settings-item-label">
+                <strong>Manage Public Holidays</strong>
+                <span>Add or edit public holidays to exclude from calculations.</span>
+              </div>
+              <a href="holidays.html" class="btn btn-secondary btn-sm">Go →</a>
+            </div>
+            <div class="settings-item">
+              <div class="settings-item-label">
+                <strong>Manage Team Members</strong>
+                <span>Add, edit, activate, or deactivate team members.</span>
+              </div>
+              <a href="team.html" class="btn btn-secondary btn-sm">Go →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Setup Help -->
+      <div class="card config-card">
+        <div class="card-header"><span class="card-title">📖 Setup Guide</span></div>
+        <div class="card-body">
+          <ol style="padding-left:18px;font-size:.9rem;line-height:2">
+            <li>Create a free Supabase project at <a href="https://supabase.com" target="_blank">supabase.com</a>.</li>
+            <li>In the Supabase SQL Editor, run <code>supabase/schema.sql</code>.</li>
+            <li>Optionally run <code>supabase/seed.sql</code> to load sample data.</li>
+            <li>Copy your Project URL and anon key from <strong>Settings → API</strong>.</li>
+            <li>Open <code>js/supabase.js</code> and replace:<br>
+              <code>const SUPABASE_URL = 'YOUR_SUPABASE_URL';</code><br>
+              <code>const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';</code>
+            </li>
+            <li>Push to GitHub and enable <strong>GitHub Pages</strong> (Settings → Pages → Deploy from branch).</li>
+            <li>Visit your GitHub Pages URL — the app is live!</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- App Info -->
+      <div class="card config-card mt-4">
+        <div class="card-header"><span class="card-title">ℹ About</span></div>
+        <div class="card-body" style="font-size:.88rem;line-height:1.8;color:var(--color-muted)">
+          <strong style="color:var(--color-text)">Team Leave Tracker v1.0</strong><br>
+          A lightweight shared leave management tool for small teams.<br>
+          No backend, no authentication — just Supabase and GitHub Pages.<br><br>
+          Stack: HTML5 · CSS3 · Vanilla JavaScript · Supabase PostgreSQL
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/utils.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  initSidebar();
+
+  // Show current config values (read-only)
+  const urlEl = document.getElementById('cfgUrl');
+  const keyEl = document.getElementById('cfgKey');
+  if (urlEl) urlEl.value = typeof SUPABASE_URL !== 'undefined' ? SUPABASE_URL : '';
+  if (keyEl) keyEl.value = typeof SUPABASE_ANON_KEY !== 'undefined'
+    ? SUPABASE_ANON_KEY.slice(0, 20) + '…' : '';
+
+  // Test connection button
+  document.getElementById('testConnBtn')?.addEventListener('click', async () => {
+    const status = document.getElementById('connStatus');
+    const msg    = document.getElementById('connMsg');
+    status.className = 'connection-status idle';
+    status.textContent = 'Testing…';
+    msg.textContent = '';
+    try {
+      const { error } = await db.from('profiles').select('id', { count: 'exact', head: true });
+      if (error) throw error;
+      status.className = 'connection-status ok';
+      status.textContent = '✓ Connected';
+      msg.textContent = 'Connection successful!';
+      showToast('Supabase connection successful!', 'success');
+    } catch (err) {
+      status.className = 'connection-status error';
+      status.textContent = '✕ Error';
+      msg.textContent = err.message;
+      showToast('Connection failed: ' + err.message, 'error');
+    }
+  });
+});
+</script>
+</body>
+</html>

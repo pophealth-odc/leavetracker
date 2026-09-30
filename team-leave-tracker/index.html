@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Leave Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - var(--header-h));
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .hero-icon { font-size: 4rem; margin-bottom: 20px; }
+    .hero h1   { font-size: 2rem; font-weight: 800; margin-bottom: 10px; }
+    .hero p    { font-size: 1rem; color: var(--color-muted); max-width: 420px; margin-bottom: 28px; }
+    .hero-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      max-width: 700px;
+      width: 100%;
+    }
+    .hero-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--color-text);
+      transition: box-shadow var(--transition), transform var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); text-decoration: none; }
+    .hero-card .card-icon { font-size: 1.8rem; }
+    .hero-card .card-label { font-size: 0.88rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+<div class="app-wrapper">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">🗓</div>
+      Leave Tracker
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item" data-page="index.html" href="index.html">
+        <span class="nav-icon">🏠</span> Dashboard
+      </a>
+      <a class="nav-item" data-page="calendar.html" href="pages/calendar.html">
+        <span class="nav-icon">📅</span> Calendar
+      </a>
+      <div class="nav-section-label">Leave</div>
+      <a class="nav-item" data-page="leave.html" href="pages/leave.html">
+        <span class="nav-icon">📝</span> Leave Records
+      </a>
+      <div class="nav-section-label">Team</div>
+      <a class="nav-item" data-page="team.html" href="pages/team.html">
+        <span class="nav-icon">👥</span> Team Members
+      </a>
+      <a class="nav-item" data-page="history.html" href="pages/history.html">
+        <span class="nav-icon">📋</span> Leave History
+      </a>
+      <div class="nav-section-label">Configuration</div>
+      <a class="nav-item" data-page="leave-types.html" href="pages/leave-types.html">
+        <span class="nav-icon">🏷</span> Leave Types
+      </a>
+      <a class="nav-item" data-page="holidays.html" href="pages/holidays.html">
+        <span class="nav-icon">📆</span> Public Holidays
+      </a>
+      <a class="nav-item" data-page="settings.html" href="pages/settings.html">
+        <span class="nav-icon">⚙</span> Settings
+      </a>
+    </nav>
+    <div class="sidebar-footer">Team Leave Tracker v1.0</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="d-flex align-center gap-2">
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">☰</button>
+        <span class="page-title">Dashboard</span>
+      </div>
+      <div class="header-actions">
+        <a href="pages/leave.html" class="btn btn-primary btn-sm">+ Add Leave</a>
+      </div>
+    </header>
+
+    <main class="page-body">
+      <div class="hero">
+        <div class="hero-icon">🗓</div>
+        <h1>Team Leave Tracker</h1>
+        <p>A simple shared tool for managing and viewing your team's leave records.</p>
+        <div class="hero-cards">
+          <a class="hero-card" href="pages/dashboard.html">
+            <span class="card-icon">🏠</span>
+            <span class="card-label">Dashboard</span>
+          </a>
+          <a class="hero-card" href="pages/calendar.html">
+            <span class="card-icon">📅</span>
+            <span class="card-label">Calendar</span>
+          </a>
+          <a class="hero-card" href="pages/leave.html">
+            <span class="card-icon">📝</span>
+            <span class="card-label">Leave Records</span>
+          </a>
+          <a class="hero-card" href="pages/team.html">
+            <span class="card-icon">👥</span>
+            <span class="card-label">Team Members</span>
+          </a>
+          <a class="hero-card" href="pages/history.html">
+            <span class="card-icon">📋</span>
+            <span class="card-label">Leave History</span>
+          </a>
+          <a class="hero-card" href="pages/leave-types.html">
+            <span class="card-icon">🏷</span>
+            <span class="card-label">Leave Types</span>
+          </a>
+          <a class="hero-card" href="pages/holidays.html">
+            <span class="card-icon">📆</span>
+            <span class="card-label">Public Holidays</span>
+          </a>
+          <a class="hero-card" href="pages/settings.html">
+            <span class="card-icon">⚙</span>
+            <span class="card-label">Settings</span>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/utils.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initSidebar();
+    // Mark active nav
+    document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+      if (item.dataset.page === 'index.html') item.classList.add('active');
+    });
+    // Redirect to dashboard automatically
+    window.location.href = 'pages/dashboard.html';
+  });
+</script>
+</body>
+</html>

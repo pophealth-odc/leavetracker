@@ -1,0 +1,113 @@
+/* ============================================================
+   Team Leave Tracker — Responsive / Mobile Styles
+   ============================================================ */
+
+/* ---------- Tablet (≤ 1024px) ---------- */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 200px; }
+  .stat-cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-grid  { grid-template-columns: 1fr; }
+}
+
+/* ---------- Hamburger shows at 768px ---------- */
+@media (max-width: 768px) {
+  .hamburger-btn { display: flex; }
+
+  /* Sidebar becomes an off-canvas drawer */
+  .sidebar {
+    transform: translateX(-100%);
+    width: 240px;
+    z-index: 200;
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  .main-content { margin-left: 0; }
+
+  .page-body { padding: 16px; }
+
+  .stat-cards-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .stat-card { padding: 14px; gap: 12px; }
+  .stat-value { font-size: 1.4rem; }
+
+  .dashboard-grid { grid-template-columns: 1fr; }
+
+  .page-header { flex-direction: column; align-items: flex-start; }
+
+  .filter-bar { gap: 8px; }
+  .filter-bar .form-control,
+  .filter-bar .search-input { width: 100%; min-width: unset; }
+
+  .form-row { grid-template-columns: 1fr; }
+
+  .calendar-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .calendar-nav .cal-title { min-width: 0; font-size: 0.95rem; }
+
+  .cal-cell { min-height: 60px; padding: 3px; }
+  .cal-day-num { width: 22px; height: 22px; font-size: 0.75rem; }
+  .cal-event   { font-size: 0.65rem; padding: 1px 4px; }
+
+  .week-header-cell .wk-date { font-size: 0.9rem; }
+  .week-event-cell { padding: 4px; }
+
+  .modal { max-width: 100%; border-radius: 12px 12px 0 0; margin-top: auto; }
+  .modal-overlay { align-items: flex-end; padding: 0; }
+
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { min-width: 600px; }
+
+  .tbl-actions { flex-wrap: nowrap; }
+  .tbl-actions .btn-sm { padding: 4px 8px; font-size: 0.78rem; }
+
+  .top-header { padding: 0 14px; }
+}
+
+/* ---------- Mobile (≤ 480px) ---------- */
+@media (max-width: 480px) {
+  html { font-size: 14px; }
+
+  .stat-cards-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-icon { width: 38px; height: 38px; font-size: 1rem; }
+  .stat-value { font-size: 1.3rem; }
+  .stat-label { font-size: 0.75rem; }
+
+  .page-body { padding: 12px; }
+
+  .btn { padding: 7px 12px; font-size: 0.83rem; }
+  .btn-sm { padding: 4px 9px; font-size: 0.78rem; }
+
+  .cal-weekday { font-size: 0.65rem; padding: 5px 2px; }
+  .cal-cell { min-height: 48px; padding: 2px; }
+  .cal-event { display: none; } /* hide events on tiny screens — tap to see */
+  .cal-cell .more-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 0.65rem;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .modal { border-radius: 14px 14px 0 0; }
+  .modal-body { padding: 14px; }
+
+  .form-actions { flex-direction: column-reverse; }
+  .form-actions .btn { width: 100%; justify-content: center; }
+
+  .calendar-filters { gap: 6px; }
+  .calendar-filters .form-control { min-width: 120px; }
+
+  .toast { min-width: 220px; max-width: calc(100vw - 32px); }
+  .toast-container { bottom: 12px; right: 12px; }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  .sidebar, .top-header, .tbl-actions, .btn, .toast-container, .filter-bar { display: none !important; }
+  .main-content { margin-left: 0; }
+  .card { box-shadow: none; border: 1px solid #ccc; }
+  body { background: #fff; }
+}
