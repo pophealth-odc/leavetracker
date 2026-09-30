@@ -214,10 +214,13 @@ async function deletePublicHoliday(id) {
 
 // ── Dashboard Aggregates ─────────────────────────────────────
 async function getDashboardStats() {
-  const today = fmtDate(new Date());
+  const now    = new Date();
+  const today  = fmtDate(now);
   const month1 = today.slice(0, 7) + '-01';
-  const month2 = today.slice(0, 7) + '-31';
-  const future = fmtDate(addDays(new Date(), 30));
+  // Last day of the current month — works for all months (28/29/30/31)
+  const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  const month2  = fmtDate(lastDay);
+  const future  = fmtDate(addDays(now, 30));
 
   const [members, onLeaveToday, upcomingLeave, monthLeave] = await Promise.all([
     db.from('profiles').select('id', { count: 'exact', head: true }).eq('is_active', true),
