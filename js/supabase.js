@@ -6,6 +6,31 @@
 const SUPABASE_URL      = 'https://vawcsvpvwepkogkfluda.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZhd2NzdnB2d2Vwa29na2ZsdWRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3MzQ0OTUsImV4cCI6MjEwNjMxMDQ5NX0.eNrehZgJB_2FSn4sFi5PtS9YpKkw9LKfbqraYC6c_6k';
 
+// ── Block file:// protocol — Supabase requires HTTP/HTTPS ──
+if (window.location.protocol === 'file:') {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.innerHTML = `
+      <div style="font-family:-apple-system,sans-serif;max-width:560px;margin:80px auto;padding:32px;border:2px solid #ef4444;border-radius:12px;background:#fff7f7;text-align:center">
+        <div style="font-size:3rem;margin-bottom:16px">⚠️</div>
+        <h2 style="color:#dc2626;margin:0 0 12px">Cannot run from file://</h2>
+        <p style="color:#374151;margin:0 0 20px;line-height:1.6">
+          The browser blocks Supabase requests when opening HTML files directly.<br>
+          This app must be served over <strong>HTTP</strong>.
+        </p>
+        <div style="background:#1e293b;color:#e2e8f0;border-radius:8px;padding:16px;text-align:left;font-family:monospace;font-size:.88rem;margin-bottom:20px;line-height:2">
+          <span style="color:#94a3b8"># In a terminal, from the project folder:</span><br>
+          <span style="color:#60a5fa">node server.js</span><br>
+          <span style="color:#94a3b8">— or —</span><br>
+          <span style="color:#60a5fa">python -m http.server 5500</span><br>
+          <span style="color:#94a3b8">Then open:</span> <span style="color:#34d399">http://localhost:5500/pages/dashboard.html</span>
+        </div>
+        <p style="color:#6b7280;font-size:.85rem;margin:0">
+          💡 Using <strong>VS Code</strong>? Right-click any .html file → <em>Open with Live Server</em>
+        </p>
+      </div>`;
+  });
+}
+
 // Load the Supabase JS client (CDN, loaded in index.html)
 const { createClient } = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
